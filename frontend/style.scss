@@ -1,0 +1,124 @@
+$widthOfFirstCell: 39px;
+$widthOfSecondCell: 4px;
+$border2cell: #f2e3df;
+$borderColor: #e6ebed;
+$padding-left: 10px;
+
+@mixin border-left-right($color){
+  border-left: 1px solid $color;
+  border-right: 1px solid $color;
+}
+
+@mixin border($color){
+  border: 1px solid $color;
+}
+
+body {
+  background-color: #e9f0f4;
+}
+
+table {
+  width: 464px;
+  border-spacing: 0;
+  font-family: Lato;
+
+
+  thead {
+    background-color: #2e3641;
+    color: #dae4eb;
+
+    tr {
+      height: 50px;
+      :first-child{
+        //width: $widthOfFirstCell;
+      }
+      :nth-child(2){
+        width: $widthOfSecondCell;
+        @include border-left-right($border2cell);
+      }
+      :nth-child(3){
+        text-align: left;
+        padding-left: $padding-left;
+      }
+    }
+  }
+
+  tbody{
+    @include border($borderColor);
+    background-color: #fff;
+    
+    tr{
+      height: 50px;
+
+      td:nth-child(2){
+        width: $widthOfSecondCell;
+        @include border-left-right($border2cell);
+      }
+
+      td:nth-child(1){
+        width: 50px;
+        text-align: center;
+      }
+
+      img {
+        height: 15px;
+      }
+      .fa {
+        color: #dae4eb;
+      }
+      .done-task {
+        text-decoration:line-through;
+        -webkit-text-decoration:line-through;
+        color: #9eb2c0;
+      }
+      p{
+        padding-left: $padding-left;
+      }
+      input[type=checkbox] {
+        margin-right: 8px;
+        cursor: pointer;
+        visibility: hidden;
+
+        &:after {
+          content: " ";
+          display: inline-block;
+          margin-left: auto;
+          padding :1px 3px 3px 1px;
+          color:#bccc6e;
+          width:10px;
+          height:10px;
+          visibility: visible;
+          @include  border(#dae4eb);
+          border-radius:0;
+          background-image: radial-gradient(circle at bottom right, #fff, #f3f3f3);
+        }
+        &:checked:after {
+          font-family: 'FontAwesome';
+          content: "\f00c";
+        }
+      }
+
+      input[name=task]{
+        border: 0;
+        padding-left: $padding-left;
+        font: {
+          family: Lato;
+          size: 16px;
+        }
+
+        &:focus{
+          outline: none;
+        }
+      }
+      .trash-done {
+        opacity: 0.5;
+      }
+    }
+
+    tr:not(:last-child){
+      td{
+        border-bottom: 1px solid $borderColor;
+      }
+    }
+  }
+}
